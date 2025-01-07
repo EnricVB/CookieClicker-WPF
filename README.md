@@ -25,4 +25,4 @@ Este es un proyecto hecho en **C#** utilizando **WPF** (Windows Presentation Fou
 
 1. Clona este repositorio en tu máquina local:
    ```bash
-   git clone https://github.com/tu-usuario/cookieclicker-wpf.git
+   git clone https://github.com/EnricVB/cookieclicker-wpf.git
