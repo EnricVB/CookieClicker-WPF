@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="assets\background.jpg" />
+    <None Remove="assets\bgRed.jpg" />
+    <None Remove="assets\buttonTile.png" />
+    <None Remove="assets\cookie.png" />
+    <None Remove="assets\cursor.png" />
+    <None Remove="assets\cursorIcon.png" />
+    <None Remove="assets\factory.png" />
+    <None Remove="assets\factoryBackground.png" />
+    <None Remove="assets\factoryIcon.png" />
+    <None Remove="assets\farm.png" />
+    <None Remove="assets\farmBackground.png" />
+    <None Remove="assets\farmerGrandma.png" />
+    <None Remove="assets\farmIcon.png" />
+    <None Remove="assets\goldCookie.png" />
+    <None Remove="assets\grandma.png" />
+    <None Remove="assets\grandmaBackground.png" />
+    <None Remove="assets\grandmaIcon.png" />
+    <None Remove="assets\mine.png" />
+    <None Remove="assets\mineBackground.png" />
+    <None Remove="assets\mineIcon.png" />
+    <None Remove="assets\minerGrandma.png" />
+    <None Remove="assets\panelHorizontal.png" />
+    <None Remove="assets\panelVertical.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="assets\background.jpg" />
+    <Resource Include="assets\bgRed.jpg" />
+    <Resource Include="assets\buttonTile.png" />
+    <Resource Include="assets\cookie.png" />
+    <Resource Include="assets\cursor.png" />
+    <Resource Include="assets\cursorIcon.png" />
+    <Resource Include="assets\factory.png" />
+    <Resource Include="assets\factoryBackground.png" />
+    <Resource Include="assets\factoryIcon.png" />
+    <Resource Include="assets\farm.png" />
+    <Resource Include="assets\farmBackground.png" />
+    <Resource Include="assets\farmerGrandma.png" />
+    <Resource Include="assets\farmIcon.png" />
+    <Resource Include="assets\goldCookie.png" />
+    <Resource Include="assets\grandma.png" />
+    <Resource Include="assets\grandmaBackground.png" />
+    <Resource Include="assets\grandmaIcon.png" />
+    <Resource Include="assets\mine.png" />
+    <Resource Include="assets\mineBackground.png" />
+    <Resource Include="assets\mineIcon.png" />
+    <Resource Include="assets\minerGrandma.png" />
+    <Resource Include="assets\panelHorizontal.png" />
+    <Resource Include="assets\panelVertical.png" />
+  </ItemGroup>
+
+</Project>

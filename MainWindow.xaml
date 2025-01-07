@@ -1,0 +1,139 @@
+﻿<Window x:Class="CookieClicker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CookieClicker"
+        xmlns:itemShop="clr-namespace:CookieClicker.usercontrols"
+        xmlns:style="clr-namespace:CookieClicker"
+        mc:Ignorable="d"
+        Background="#FF38140C"
+        Title="Cookie Clicker" Height="1080" Width="1920" Foreground="#FF915F30"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        SizeChanged="OnChangeWindowSize">
+
+    <Window.Resources>
+        <ControlTemplate x:Key="NoHoverButtonStyle" TargetType="Button">
+            <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="0">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{x:Static SystemColors.ControlLightBrush}"/>
+                    <Setter Property="Foreground" Value="{x:Static SystemColors.GrayTextBrush}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        
+        
+        <ImageBrush x:Key="GrandmaBackgroundBrush" ImageSource="assets/grandmaBackground.png" TileMode="Tile" Viewport="0,0,0.25,1" ViewportUnits="RelativeToBoundingBox"/>
+        <ImageBrush x:Key="FarmBackgroundBrush" ImageSource="assets/farmBackground.png" TileMode="Tile" Viewport="0,0,0.25,1" ViewportUnits="RelativeToBoundingBox"/>
+        <ImageBrush x:Key="FactoryBackgroundBrush" ImageSource="assets/factoryBackground.png" TileMode="Tile" Viewport="0,0,0.25,1" ViewportUnits="RelativeToBoundingBox"/>
+        <ImageBrush x:Key="MineBackgroundBrush" ImageSource="assets/mineBackground.png" TileMode="Tile" Viewport="0,0,0.25,1" ViewportUnits="RelativeToBoundingBox"/>
+
+        <ImageBrush x:Key="ClickIcon" ImageSource="assets/cursorIcon.png" TileMode="None" Viewport="0, 0, 1, 1" ViewportUnits="RelativeToBoundingBox"/>
+        <ImageBrush x:Key="GrandmaIcon" ImageSource="assets/grandmaIcon.png" TileMode="Tile" Viewport="0, 0, 1, 1" ViewportUnits="RelativeToBoundingBox"/>
+        <ImageBrush x:Key="FarmIcon" ImageSource="assets/farmIcon.png" TileMode="Tile" Viewport="0, 0, 1, 1" ViewportUnits="RelativeToBoundingBox"/>
+        <ImageBrush x:Key="MineIcon" ImageSource="assets/mineIcon.png" TileMode="Tile" Viewport="0, 0, 1, 1" ViewportUnits="RelativeToBoundingBox"/>
+        <ImageBrush x:Key="FactoryIcon" ImageSource="assets/factoryIcon.png" TileMode="Tile" Viewport="0, 0, 1, 1" ViewportUnits="RelativeToBoundingBox"/>
+
+        <ImageBrush x:Key="Grandma" ImageSource="assets/grandma.png" TileMode="Tile" Viewport="0, 0, 1, 1" ViewportUnits="RelativeToBoundingBox"/>
+        <ImageBrush x:Key="Farm" ImageSource="assets/farm.png" TileMode="Tile" Viewport="0, 0, 1, 1" ViewportUnits="RelativeToBoundingBox"/>
+        <ImageBrush x:Key="Mine" ImageSource="assets/mine.png" TileMode="Tile" Viewport="0, 0, 1, 1" ViewportUnits="RelativeToBoundingBox"/>
+        <ImageBrush x:Key="Factory" ImageSource="assets/factory.png" TileMode="Tile" Viewport="0, 0, 1, 1" ViewportUnits="RelativeToBoundingBox"/>
+
+        <ImageBrush x:Key="Cookie" ImageSource="assets/cookie.png" TileMode="None" Viewport="0, 0, 1, 1" ViewportUnits="RelativeToBoundingBox"/>
+        <ImageBrush x:Key="GoldCookie" ImageSource="assets/goldCookie.png" TileMode="None" Viewport="0, 0, 1, 1" ViewportUnits="RelativeToBoundingBox"/>
+        <ImageBrush x:Key="RedBg" ImageSource="assets/bgRed.jpg" TileMode="None" Viewport="0, 0, 1, 1" ViewportUnits="RelativeToBoundingBox"/>
+    </Window.Resources>
+
+    <Grid x:Name="SimpleMovementBorder">
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="assets/background.jpg"/>
+            </Grid.Background>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Name="CookieSpace" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <Viewbox Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20">
+                    <TextBlock Name="CookiesPoints" Text="{Binding CookiesAmount, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" Foreground="White" FontFamily="Global Serif"/>
+                </Viewbox>
+                <Border Grid.Row="1">
+                    <Button Name="Cookie" Background="{StaticResource Cookie}" Template="{StaticResource NoHoverButtonStyle}" Width="250" Height="250" Click="OnCookieClick"/>
+                </Border>
+                <Border Grid.Row="2" Name="RedBg" Background="{StaticResource RedBg}"/>
+            </Grid>
+
+            <Grid x:Name="GameSpace" Grid.Column="1" Loaded="GameSpace_Loaded">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+
+                <Image Grid.Row="1" Source="assets/panelHorizontal.png" VerticalAlignment="Top" Height="50"/>
+
+                <Border x:Name="GrandmaSpace" Grid.Row="2" Background="{StaticResource GrandmaBackgroundBrush}">
+                    <Canvas x:Name="GrandmaCanvas"/>
+                </Border>
+                <Image x:Name="GrandmeSeparator" Grid.Row="2" Source="assets/panelHorizontal.png" VerticalAlignment="Bottom"/>
+
+                <Border x:Name="FarmSpace" Grid.Row="3" Background="{StaticResource FarmBackgroundBrush}">
+                    <Canvas x:Name="FarmCanvas"/>
+                </Border>
+                <Image x:Name="FarmSeparator" Grid.Row="3" Source="assets/panelHorizontal.png" VerticalAlignment="Bottom"/>
+
+                <Border x:Name="MineSpace" Grid.Row="4" Background="{StaticResource MineBackgroundBrush}">
+                    <Canvas x:Name="MineCanvas"/>
+                </Border>
+                <Image x:Name="MineSeparator" Grid.Row="4" Source="assets/panelHorizontal.png" VerticalAlignment="Bottom"/>
+
+                <Border x:Name="FactorySpace" Grid.Row="5" Background="{StaticResource FactoryBackgroundBrush}">
+                    <Canvas x:Name="FactoryCanvas"/>
+                </Border>
+                <Image x:Name="FactorySeparator" Grid.Row="5" Source="assets/panelHorizontal.png" VerticalAlignment="Bottom"/>
+            </Grid>
+
+            <Grid x:Name="ShopSpace" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height=".5"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <itemShop:ItemShop Grid.Row="2" MouseUp="OnBuyItem" MouseLeftButtonUp="OnBuyCursor" x:Name="BuyCursor" UCBackground="{StaticResource UnallowedButtonTile}" ItemName="Cursor" ItemIcon="{StaticResource ClickIcon}" ItemPrice="10" ItemQuantity="0" Multiplier="1.8" CookiesPerItem="1"/>
+                <itemShop:ItemShop Grid.Row="3" MouseUp="OnBuyItem" x:Name="BuyGrandma" UCBackground="{StaticResource UnallowedButtonTile}" ItemName="Grandma" ItemIcon="{StaticResource GrandmaIcon}" ItemPrice="50" ItemQuantity="0" Multiplier="2.2" CookiesPerItem="2"/>
+                <itemShop:ItemShop Grid.Row="4" MouseUp="OnBuyItem" x:Name="BuyFarm" UCBackground="{StaticResource UnallowedButtonTile}" ItemName="Farmer" ItemIcon="{StaticResource FarmIcon}" ItemPrice="100" ItemQuantity="0" Multiplier="2.8" CookiesPerItem="5"/>
+                <itemShop:ItemShop Grid.Row="5" MouseUp="OnBuyItem" x:Name="BuyMine" UCBackground="{StaticResource UnallowedButtonTile}" ItemName="Miner" ItemIcon="{StaticResource MineIcon}" ItemPrice="5000" ItemQuantity="0" Multiplier="3.2" CookiesPerItem="50"/>
+                <itemShop:ItemShop Grid.Row="6" MouseUp="OnBuyItem" x:Name="BuyFactory" UCBackground="{StaticResource UnallowedButtonTile}" ItemName="Factory" ItemIcon="{StaticResource FactoryIcon}" ItemPrice="15000" ItemQuantity="0" Multiplier="3.8" CookiesPerItem="1000"/>
+
+                <Border Grid.Row="0" Name="ShopRedBgTop" Background="{StaticResource RedBg}"/>
+                <Border Grid.Row="7" Name="ShopRedBgBottom" Background="{StaticResource RedBg}"/>
+            </Grid>
+
+            <Image Grid.Column="1" HorizontalAlignment="Right" Source="assets/panelVertical.png"/>
+            <Image Grid.Column="1" HorizontalAlignment="Left" Source="assets/panelVertical.png"/>
+        </Grid>
+    </Grid>
+</Window>
